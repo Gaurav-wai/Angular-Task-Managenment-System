@@ -1,0 +1,228 @@
+<!-- 
+     <style>
+         .task-card {
+             display: flex;
+             align-items: center;
+             justify-content: space-between;
+             background: #fff;
+             padding: 15px;
+             border-radius: 10px;
+             box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+             margin: 20px;
+         }
+         .status {
+             color: green;
+             font-weight: bold;
+         }
+         .highlight-date {
+             background: yellow;
+             padding: 3px 8px;
+             border-radius: 5px;
+         }
+         .highlight-end {
+             background: pink;
+         }
+         .negative-days {
+             color: green;
+         }
+     </style>
+ 
+ 
+     <div *ngFor= "let task of tasks" class="container mt-4">
+         <div class=" row task-card d-flex justify-content-end">
+             <div class="col-12 col-sm-3 d-flex align-items-center">
+                 <img src="https://app.intimepro.io/assets/common/images/projects/default%20image%20for%20project%20-1.png" alt="Task Icon" width="50">
+                 <div class="ms-3">
+                     <h5>Abel System</h5>
+                     <p class="status">Status: {{ task.status }}</p>
+                 </div>
+             </div>
+             <div class="col-12 col-sm-3">
+                 <p><strong>Created by:</strong> {{ task.createdBy }}</p>
+                 <p><strong>Program Manager:</strong> -</p>
+                 <p><strong>Project Manager:</strong>{{ task.projectManager }}</p>
+             </div>
+             <div class="col-12 col-sm-3">
+                 <p><strong>Creation Date:</strong> <span class="highlight-date">{{ task.creationDate }}</span></p>
+                 <p><strong>Start Date:</strong> <span class="highlight-date">{{ task.startDate }}</span></p>
+                 <p><strong>End Date:</strong> <span class="highlight-date highlight-end">{{ task.endDate }}</span></p>
+             </div>
+             <div class="col-12 col-sm-3">
+                 <p><strong>Team Members:</strong> {{ task.teamMembers }}</p>
+                 <p><strong>Task:</strong>{{ task.taskCount }}</p>
+                 <p><strong>Due Date:</strong> <span class="negative-days">-{{ task.dueDays }}</span></p>
+             </div>
+         </div>
+     </div>
+  -->
+ 
+
+  <!-- <div class="container mt-4">
+    <div *ngFor="let task of tasks" class="row justify-content-center">
+        <div class="col-12 col-md-11 col-lg-10">
+            <div class="task-card p-3">
+                <div class="row">
+                    <div class="col-12 col-sm-3 d-flex justify-content-between">
+                        <img src="assets/task-icon.png" alt="Task Icon" width="50">
+                        <div class="ms-3">
+                            <h5>Abel System</h5>
+                            <p class="status">Status: {{ task.status }}</p>
+                        </div>
+                    </div>
+                    <div class="col-12 col-sm-3">
+                        <p><strong>Created by:</strong> {{ task.createdBy }}</p>
+                        <p><strong>Program Manager:</strong> -</p>
+                        <p><strong>Project Manager:</strong> {{ task.projectManager }}</p>
+                    </div>
+                    <div class="col-12 col-sm-3">
+                        <p><strong>Creation Date:</strong> <span class="highlight-date">{{ task.creationDate }}</span></p>
+                        <p><strong>Start Date:</strong> <span class="highlight-date">{{ task.startDate }}</span></p>
+                        <p><strong>End Date:</strong> <span class="highlight-date highlight-end">{{ task.endDate }}</span></p>
+                    </div>
+                    <div class="col-12 col-sm-3">
+                        <p><strong>Team Members:</strong> {{ task.teamMembers }}</p>
+                        <p><strong>Task:</strong> {{ task.taskCount }}</p>
+                        <p><strong>Due Date:</strong> <span class="negative-days">-{{ task.dueDays }}</span></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div> -->                                      
+                                                                               
+                                                                                        
+                                                        
+
+  <!-- <div class="container mt-4">
+    <div class="task-card" *ngIf="task">
+        <div class="d-flex align-items-center">
+            <img src="assets/task-icon.png" alt="Task Icon" width="50">
+            <div class="ms-3">
+                <h5>{{ task.name }}</h5>
+                <p class="status">Status: {{ task.status }}</p>
+            </div>
+        </div>
+        <div>
+            <p><strong>Created by:</strong> {{ task.createdBy }}</p>
+            <p><strong>Program Manager:</strong> {{ task.programManager || '-' }}</p>
+            <p><strong>Project Manager:</strong> {{ task.projectManager }}</p>
+        </div>
+        <div>
+            <p><strong>Creation Date:</strong> <span class="highlight-date">{{ task.creationDate }}</span></p>
+            <p><strong>Start Date:</strong> <span class="highlight-date">{{ task.startDate }}</span></p>
+            <p><strong>End Date:</strong> <span class="highlight-date highlight-end">{{ task.endDate }}</span></p>
+        </div>
+        <div>
+            <p><strong>Team Members:</strong> {{ task.teamMembers }}</p>
+            <p><strong>Task:</strong> {{ task.taskCount }}</p>
+            <p><strong>Due Date:</strong> <span class="negative-days">{{ task.dueDate }} Days</span></p>
+        </div>
+    </div>
+</div> -->                                                                                                                                                                                                     
+
+<style>
+  .task-card {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: #fff;
+      padding: 15px;
+      border-radius: 10px;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+      margin: 20px;
+  }
+  .status {
+      color: green;
+      font-weight: bold;
+  }
+  .highlight-date {
+      background: yellow;
+      padding: 3px 8px;
+      border-radius: 5px;
+  }
+  .highlight-end {
+      background: pink;
+  }
+  .negative-days {
+      color: green;
+  }
+</style>
+
+<div class="container mt-4">
+  <h3>Projects</h3>
+  <button (click)="redirectToAddProject()" class="btn btn-primary mb-3">Add Project</button>
+
+  <div *ngFor="let project of projects" class="task-card" (click)="redirectToTask(project)" style="cursor: pointer;">
+      <div class="d-flex align-items-center" >
+          <img src="https://app.intimepro.io/assets/common/images/projects/default%20image%20for%20project%20-1.png" 
+               alt="Task Icon" width="50">
+          <div class="ms-3">
+              <h5>{{ project.title }}</h5>
+              <p class="status">Status: {{ project.status }}</p>
+          </div>
+      </div>
+      <div>
+          <p><strong>Created by:</strong> {{ project.createdBy }}</p>
+          <p><strong>Program Manager:</strong> {{ project.programManager || '-' }}</p>
+          <p><strong>Project Manager:</strong> {{ project.projectManager }}</p>
+      </div>
+      <div>
+          <p><strong>Creation Date:</strong> <span class="highlight-date">{{ project.creationDate }}</span></p>
+          <p><strong>Start Date:</strong> <span class="highlight-date">{{ project.startDate }}</span></p>
+          <p><strong>End Date:</strong> <span class="highlight-date highlight-end">{{ project.endDate }}</span></p>
+      </div>
+      <div>
+          <p><strong>Team Members:</strong> {{ project.teamMembers }}</p>
+          <p><strong>Tasks:</strong> {{ project.taskCount }}</p>
+          <p><strong>Due Date:</strong> <span class="negative-days">{{ project.dueDays }} Days</span></p>
+      </div>
+
+      <div class="text-end mt-2">
+        <button class="btn btn-sm btn-warning me-2"
+        (click)="openEditModal(project); $event.stopPropagation()"
+        data-bs-toggle="modal"
+        data-bs-target="#editProjectModal">
+  Edit
+</button>
+
+<button class="btn btn-sm btn-outline-danger"
+        (click)="deleteProject(project.title); $event.stopPropagation()">
+  Delete
+</button>
+
+      
+  </div>
+</div>
+
+<!-- Edit Project Modal -->
+<div class="modal fade" id="editProjectModal" tabindex="-1" aria-labelledby="editProjectModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <form (ngSubmit)="updateProject()">
+          <div class="modal-header">
+            <h5 class="modal-title" id="editProjectModalLabel">Edit Project</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          
+          <div class="modal-body">
+            <div class="mb-3">
+              <label for="editProjectName" class="form-label">Project Name</label>
+              <input type="text" id="editProjectName" [(ngModel)]="selectedProject.projectname" name="editProjectName" class="form-control" required>
+            </div>
+  
+            <div class="mb-3">
+              <label for="editProjectDescription" class="form-label">Project Description</label>
+              <textarea id="editProjectDescription" [(ngModel)]="selectedProject.projectdescription" name="editProjectDescription" class="form-control" required></textarea>
+            </div>
+          </div>
+  
+          <div class="modal-footer">
+            <button type="submit" class="btn btn-primary">Save Changes</button>
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+  
+                                                                                     

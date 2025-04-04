@@ -1,0 +1,42 @@
+.task-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    margin-bottom: 10px;
+    background: #fff;
+  }
+  
+  .task-header h5 {
+    margin: 0;
+    font-weight: bold;
+  }
+  
+  .status {
+    padding: 5px 10px;
+    border-radius: 5px;                                                        
+    color: white;
+  }
+  
+  .status.Completed {
+    background-color: green;
+  }
+  
+  .date {
+    color: #f39c12; /* Yellow */
+  }
+  
+  .team-count, .task-count {
+    font-weight: bold;
+  }
+  
+  .due-date.negative {
+    color: red;
+  }
+  
+  .due-date.positive {
+    color: green;
+  }
+                                                                                                                                                            

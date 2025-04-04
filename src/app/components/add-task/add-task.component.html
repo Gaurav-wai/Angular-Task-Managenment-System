@@ -1,0 +1,58 @@
+<p>add-task works!</p>
+<div class="container mt-4">
+    <h4 class="mb-3">Add Task</h4>
+    <form (ngSubmit)="onSubmit()" class="card p-3 shadow-sm">
+        <div class="row">
+            <!-- Title Input -->
+            <div class="col-md-6">
+                <label for="title" class="form-label">Title</label>
+                <input type="text" class="form-control" id="title" [(ngModel)]="task.title" name="title" required>
+            </div>
+
+            <!-- Assigned To -->
+            <div class="col-md-6">
+                <label for="assignedTo" class="form-label">Assigned To</label>
+                <input type="text" class="form-control" id="assignedTo" [(ngModel)]="task.assignedTo" name="assignedTo" required>
+            </div>
+        </div>
+
+        <div class="row mt-3">
+            <!-- Status Dropdown -->
+            <div class="col-md-6">
+                <label for="status" class="form-label">Status</label>
+                <select class="form-select" id="status" [(ngModel)]="task.status" name="status" required>
+                    <option value="High">High</option>
+                    <option value="Medium">Medium</option>
+                    <option value="Low">Low</option>
+                </select>
+            </div>
+
+            <!-- Assigned User -->
+            <div class="col-md-6">
+                <label for="assignedUser" class="form-label">Assigned User</label>
+                <input type="text" class="form-control" id="assignedUser" [(ngModel)]="task.assignedUser" name="assignedUser" required>
+            </div>
+        </div>
+
+        <div class="row mt-3">
+            <!-- Estimation -->
+            <div class="col-md-6">
+                <label for="estimate" class="form-label">Estimate (h)</label>
+                <input type="number" class="form-control" id="estimate" [(ngModel)]="task.estimate" name="estimate" required>
+            </div>
+
+            <!-- Time Spent -->
+            <div class="col-md-6">
+                <label for="timeSpent" class="form-label">Time Spent (h)</label>
+                <input type="number" class="form-control" id="timeSpent" [(ngModel)]="task.timeSpent" name="timeSpent" required>
+            </div>
+        </div>
+
+        <!-- Submit Button -->
+        <div class="d-flex justify-content-end mt-4">
+            <button type="submit" class="btn btn-primary">Add Task</button>
+        </div>
+    </form>
+
+    <button type="button" class="btn btn-danger" (click)="onClose()">close</button>
+</div>
