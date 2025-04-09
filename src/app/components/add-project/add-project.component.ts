@@ -1,10 +1,12 @@
+import { NgIf } from '@angular/common';
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
+import { NavbarComponent } from '../navbar/navbar.component';
 
 @Component({
   selector: 'app-add-project',
-  imports: [FormsModule],
+  imports: [FormsModule, NgIf, NavbarComponent],
   templateUrl: './add-project.component.html',
   styleUrl: './add-project.component.css'
 })
@@ -17,11 +19,39 @@ export class AddProjectComponent {
     projectManager: '',
     startDate: '',
     endDate: '',
-    teamMembers: '',
-    dueDays: ''
+    teamMembers:[],
+    dueDays: '',
+    taskCount: 0,
+    status:'',
+    creationDate: ''
   }; 
 
-  constructor(private router: Router) {}
+
+  teamMembers: string[] = [
+    'Alice',
+    'Bob',
+    'Charlie',
+    'David',
+    'Emma',
+    'Frank',
+    'Grace',
+    'Hannah',
+    'Ian',
+    'Julia'
+  ];
+
+  // now: Date = new Date();
+
+  now: string;
+
+  constructor(private router: Router) {
+
+    this.now = new Date().toISOString().substring(0, 10);
+
+    // Set the default value for creationDate using now
+    this.newProject.creationDate = this.now;
+  }
+
 
   saveProject() {
 
@@ -47,4 +77,4 @@ export class AddProjectComponent {
   }
 
 }
-                                                                                                   
+                                                                                                                                                                                  

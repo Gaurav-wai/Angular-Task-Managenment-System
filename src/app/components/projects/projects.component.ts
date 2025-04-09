@@ -2,16 +2,18 @@ import { NgClass, NgFor, NgIf } from '@angular/common';
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
+import { NavbarComponent } from '../navbar/navbar.component';
 declare var bootstrap: any;
 
 
 @Component({
   selector: 'app-projects',
-  imports: [NgClass,NgFor, NgIf, FormsModule],
+  imports: [NgClass,NgFor, NgIf, FormsModule, NavbarComponent],
   templateUrl: './projects.component.html',
   styleUrl: './projects.component.css'
 })
 export class ProjectsComponent {
+  userName: string = '';
 
   constructor(private router : Router){}
 
@@ -19,11 +21,15 @@ export class ProjectsComponent {
 
   selectedProject: any = {
     id: '',
-    userid: '',
-    projectname: '',
-    projectdescription: ''
+    title: '',
+    description: '',
+    createdBy: '' // same as loggedInUser (email)
   };
- 
+  
+  
+  searchText: string = '';
+  selectedStatus: string = '';
+  
 
   ngOnInit() {
     const storedProjects = localStorage.getItem('projects');
@@ -38,41 +44,62 @@ export class ProjectsComponent {
       this.projects = []; // No projects to show
     }
 
+
+        // ✅ Apply dark mode class based on saved setting
+        const savedMode = localStorage.getItem('darkMode');
+        if (savedMode === 'true') {
+          document.body.classList.add('dark-mode');
+        } else {
+          document.body.classList.remove('dark-mode');
+        }
  
+        
+        if (loggedInUser) {
+          // If you're only storing email
+          this.userName = loggedInUser;
+        }
+        
   }
   
-  // ngOnInit() {
-  //   const currentUser = JSON.parse(localStorage.getItem('currentUser') || '{}');
-  //   const allProjects = JSON.parse(localStorage.getItem('projects') || '[]');
 
-  //   this.projects = allProjects.filter((proj: any) => proj.userid === currentUser.id);
-  // }
 
   openEditModal(project: any): void {
-    this.selectedProject = { ...project }; // Clone to avoid binding weirdness
+    this.selectedProject = { ...project };
   }
+  
+  
+
   
 
   updateProject(): void {
     const allProjects = JSON.parse(localStorage.getItem('projects') || '[]');
-    const index = allProjects.findIndex((p: any) => p.id === this.selectedProject.id);
+    const loggedInUser = localStorage.getItem('loggedInUser');
+  
+    const index = allProjects.findIndex((p: any) => 
+      p.id === this.selectedProject.id && p.createdBy === loggedInUser
+    );
   
     if (index !== -1) {
-      allProjects[index] = { ...this.selectedProject }; // Update the object
+      // Replace with updated data
+      allProjects[index] = {
+        ...this.selectedProject,
+        createdBy: loggedInUser // Ensure consistency
+      };
+  
       localStorage.setItem('projects', JSON.stringify(allProjects));
   
-      // Re-load the user's projects
-      const currentUser = JSON.parse(localStorage.getItem('currentUser') || '{}');
-      this.projects = allProjects.filter((p: any) => p.userid === currentUser.id);
+      // Refresh current user's project list
+      this.projects = allProjects.filter((p: any) => p.createdBy === loggedInUser);
     }
   
-    // Close modal manually (Bootstrap 5 way)
+    // Close the modal
     const modalElement = document.getElementById('editProjectModal');
     if (modalElement) {
       const modalInstance = bootstrap.Modal.getInstance(modalElement) || new bootstrap.Modal(modalElement);
       modalInstance.hide();
     }
   }
+  
   
 
 
@@ -82,22 +109,7 @@ export class ProjectsComponent {
     this.router.navigate(['/editProject']); // We'll create this component next
   }
   
-  // deleteProject(title: string) {
-  //   const storedProjects = localStorage.getItem('projects');
-  //   if (storedProjects) {
-  //     let allProjects = JSON.parse(storedProjects);
-  
-  //     // 🔥 Filter out the project by title
-  //     allProjects = allProjects.filter((proj: any) => proj.title !== title);
-  
-  //     // 🔁 Update localStorage
-  //     localStorage.setItem('projects', JSON.stringify(allProjects));
-  
-  //     // 🔃 Refresh list of projects for logged-in user
-  //     const loggedInUser = localStorage.getItem('loggedInUser');
-  //     this.projects = allProjects.filter((proj: any) => proj.createdBy === loggedInUser);
-  //   }
-  // }
+
 
   deleteProject(title: string): void {
     const allProjects = JSON.parse(localStorage.getItem('projects') || '[]');
@@ -117,7 +129,24 @@ export class ProjectsComponent {
     this.projects = updatedProjects.filter((proj: any) => proj.createdBy === loggedInUser);
   }
   
+
+
+
+  filteredProjects() {
+    return this.projects.filter(project => {
+      const matchesName = project.title.toLowerCase().includes(this.searchText.toLowerCase());
+      const matchesStatus = this.selectedStatus ? project.status === this.selectedStatus : true;
+      return matchesName && matchesStatus;
+    });
+  }
+ 
   
+  clearFilters() {
+    this.searchText = '';
+    this.selectedStatus = '';
+  }
+  
+
   
   redirectToAddProject() {
     this.router.navigate(['/addProject']); // Navigate to add project page

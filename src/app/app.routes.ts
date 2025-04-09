@@ -7,7 +7,7 @@ import { AddTaskComponent } from './components/add-task/add-task.component';
 import { DisplayTasksComponent } from './components/display-tasks/display-tasks.component';
 
 export const routes: Routes = [
-{path:"",component: LoginComponent},
+
 {path: 'login', component: LoginComponent},
 {path:'projects', component: ProjectsComponent},    
 {path:"signup", component:SignupComponent},
@@ -15,5 +15,5 @@ export const routes: Routes = [
 {path: "addTask", component:AddTaskComponent},
 {path: "displayTasks", component:DisplayTasksComponent},
 
-{ path: '', redirectTo: '/login', pathMatch: 'full' } // Default route
-];
+{ path: '', redirectTo: '/login', pathMatch: 'full' }, // ✅ Only one default redirect
+];                                                                                                                                                                                                                                                                                                                      

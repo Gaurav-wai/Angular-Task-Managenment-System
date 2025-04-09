@@ -1,58 +1,119 @@
-<p>add-task works!</p>
+<app-navbar></app-navbar> 
+
 <div class="container mt-4">
     <h4 class="mb-3">Add Task</h4>
-    <form (ngSubmit)="onSubmit()" class="card p-3 shadow-sm">
-        <div class="row">
-            <!-- Title Input -->
-            <div class="col-md-6">
-                <label for="title" class="form-label">Title</label>
-                <input type="text" class="form-control" id="title" [(ngModel)]="task.title" name="title" required>
-            </div>
-
-            <!-- Assigned To -->
-            <div class="col-md-6">
-                <label for="assignedTo" class="form-label">Assigned To</label>
-                <input type="text" class="form-control" id="assignedTo" [(ngModel)]="task.assignedTo" name="assignedTo" required>
-            </div>
+  
+    <form #taskForm="ngForm" (ngSubmit)="onSubmit()" class="card p-3 shadow-sm">
+  
+      <div class="row">
+        <!-- Title -->
+        <div class="col-md-6">
+          <label for="title" class="form-label">Title</label>
+          <input type="text" 
+                 class="form-control" 
+                 id="title" 
+                 name="title" 
+                 [(ngModel)]="task.title" 
+                 #title="ngModel" 
+                 required />
+          <div *ngIf="title.invalid && (title.dirty || title.touched)" class="text-danger">
+            Title is required.
+          </div>
         </div>
-
-        <div class="row mt-3">
-            <!-- Status Dropdown -->
-            <div class="col-md-6">
-                <label for="status" class="form-label">Status</label>
-                <select class="form-select" id="status" [(ngModel)]="task.status" name="status" required>
-                    <option value="High">High</option>
-                    <option value="Medium">Medium</option>
-                    <option value="Low">Low</option>
-                </select>
-            </div>
-
-            <!-- Assigned User -->
-            <div class="col-md-6">
-                <label for="assignedUser" class="form-label">Assigned User</label>
-                <input type="text" class="form-control" id="assignedUser" [(ngModel)]="task.assignedUser" name="assignedUser" required>
-            </div>
+  
+        <!-- Assigned To -->
+        <div class="col-md-6">
+          <label for="assignedTo" class="form-label">Assigned To</label>
+          <input type="text" 
+                 class="form-control"
+                 id="assignedTo" 
+                 name="assignedTo" 
+                 [(ngModel)]="task.assignedTo" 
+                 #assignedTo="ngModel" 
+                 required />
+          <div *ngIf="assignedTo.invalid && (assignedTo.dirty || assignedTo.touched)" class="text-danger">
+            Assigned To is required.
+          </div>
         </div>
-
-        <div class="row mt-3">
-            <!-- Estimation -->
-            <div class="col-md-6">
-                <label for="estimate" class="form-label">Estimate (h)</label>
-                <input type="number" class="form-control" id="estimate" [(ngModel)]="task.estimate" name="estimate" required>
-            </div>
-
-            <!-- Time Spent -->
-            <div class="col-md-6">
-                <label for="timeSpent" class="form-label">Time Spent (h)</label>
-                <input type="number" class="form-control" id="timeSpent" [(ngModel)]="task.timeSpent" name="timeSpent" required>
-            </div>
+      </div>
+  
+      <div class="row mt-3">
+        <!-- Status -->
+        <div class="col-md-6">
+          <label for="status" class="form-label">Status</label>
+          <select class="form-select" 
+                  id="status" 
+                  name="status" 
+                  [(ngModel)]="task.status" 
+                  #status="ngModel" 
+                  required>
+            <option value="" disabled selected>Select priority</option>
+            <option value="High">High</option>
+            <option value="Medium">Medium</option>
+            <option value="Low">Low</option>
+          </select>
+          <div *ngIf="status.invalid && (status.dirty || status.touched)" class="text-danger">
+            Status is required.
+          </div>
         </div>
-
-        <!-- Submit Button -->
-        <div class="d-flex justify-content-end mt-4">
-            <button type="submit" class="btn btn-primary">Add Task</button>
+  
+        <!-- Assigned User -->
+        <div class="col-md-6">
+          <label for="assignedUser" class="form-label">Assigned User</label>
+          <input type="text" 
+                 class="form-control" 
+                 id="assignedUser" 
+                 name="assignedUser" 
+                 [(ngModel)]="task.assignedUser" 
+                 #assignedUser="ngModel" 
+                 required />
+          <div *ngIf="assignedUser.invalid && (assignedUser.dirty || assignedUser.touched)" class="text-danger">
+            Assigned User is required.
+          </div>
         </div>
+      </div>
+  
+      <div class="row mt-3">
+        <!-- Estimate -->
+        <div class="col-md-6">
+          <label for="estimate" class="form-label">Estimate (h)</label>
+          <input type="number" 
+                 class="form-control" 
+                 id="estimate" 
+                 name="estimate" 
+                 [(ngModel)]="task.estimate" 
+                 #estimate="ngModel" 
+                 required 
+                 min="1" />
+          <div *ngIf="estimate.invalid && (estimate.dirty || estimate.touched)" class="text-danger">
+            Please enter a valid estimate (min 1 hour).
+          </div>
+        </div>
+  
+        <!-- Time Spent -->
+        <div class="col-md-6">
+          <label for="timeSpent" class="form-label">Time Spent (h)</label>
+          <input type="number" 
+                 class="form-control" 
+                 id="timeSpent" 
+                 name="timeSpent" 
+                 [(ngModel)]="task.timeSpent" 
+                 #timeSpent="ngModel" 
+                 required 
+                 min="0" />
+          <div *ngIf="timeSpent.invalid && (timeSpent.dirty || timeSpent.touched)" class="text-danger">
+            Time spent must be 0 or more.
+          </div>
+        </div>
+      </div>
+  
+      <!-- Submit Button -->
+      <div class="d-flex justify-content-end mt-4">
+        <button type="submit" class="btn btn-primary" [disabled]="taskForm.invalid">Add Task</button>
+      </div>
+  
     </form>
-
-    <button type="button" class="btn btn-danger" (click)="onClose()">close</button>
-</div>
+  
+    <!-- Close Button -->
+    <button type="button" class="btn btn-danger mt-3" (click)="onClose()">Close</button>
+  </div>

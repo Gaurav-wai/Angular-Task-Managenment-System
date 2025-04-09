@@ -1,158 +1,39 @@
-<!-- 
-     <style>
-         .task-card {
-             display: flex;
-             align-items: center;
-             justify-content: space-between;
-             background: #fff;
-             padding: 15px;
-             border-radius: 10px;
-             box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-             margin: 20px;
-         }
-         .status {
-             color: green;
-             font-weight: bold;
-         }
-         .highlight-date {
-             background: yellow;
-             padding: 3px 8px;
-             border-radius: 5px;
-         }
-         .highlight-end {
-             background: pink;
-         }
-         .negative-days {
-             color: green;
-         }
-     </style>
- 
- 
-     <div *ngFor= "let task of tasks" class="container mt-4">
-         <div class=" row task-card d-flex justify-content-end">
-             <div class="col-12 col-sm-3 d-flex align-items-center">
-                 <img src="https://app.intimepro.io/assets/common/images/projects/default%20image%20for%20project%20-1.png" alt="Task Icon" width="50">
-                 <div class="ms-3">
-                     <h5>Abel System</h5>
-                     <p class="status">Status: {{ task.status }}</p>
-                 </div>
-             </div>
-             <div class="col-12 col-sm-3">
-                 <p><strong>Created by:</strong> {{ task.createdBy }}</p>
-                 <p><strong>Program Manager:</strong> -</p>
-                 <p><strong>Project Manager:</strong>{{ task.projectManager }}</p>
-             </div>
-             <div class="col-12 col-sm-3">
-                 <p><strong>Creation Date:</strong> <span class="highlight-date">{{ task.creationDate }}</span></p>
-                 <p><strong>Start Date:</strong> <span class="highlight-date">{{ task.startDate }}</span></p>
-                 <p><strong>End Date:</strong> <span class="highlight-date highlight-end">{{ task.endDate }}</span></p>
-             </div>
-             <div class="col-12 col-sm-3">
-                 <p><strong>Team Members:</strong> {{ task.teamMembers }}</p>
-                 <p><strong>Task:</strong>{{ task.taskCount }}</p>
-                 <p><strong>Due Date:</strong> <span class="negative-days">-{{ task.dueDays }}</span></p>
-             </div>
-         </div>
-     </div>
-  -->
- 
+<app-navbar></app-navbar>                                    
 
-  <!-- <div class="container mt-4">
-    <div *ngFor="let task of tasks" class="row justify-content-center">
-        <div class="col-12 col-md-11 col-lg-10">
-            <div class="task-card p-3">
-                <div class="row">
-                    <div class="col-12 col-sm-3 d-flex justify-content-between">
-                        <img src="assets/task-icon.png" alt="Task Icon" width="50">
-                        <div class="ms-3">
-                            <h5>Abel System</h5>
-                            <p class="status">Status: {{ task.status }}</p>
-                        </div>
-                    </div>
-                    <div class="col-12 col-sm-3">
-                        <p><strong>Created by:</strong> {{ task.createdBy }}</p>
-                        <p><strong>Program Manager:</strong> -</p>
-                        <p><strong>Project Manager:</strong> {{ task.projectManager }}</p>
-                    </div>
-                    <div class="col-12 col-sm-3">
-                        <p><strong>Creation Date:</strong> <span class="highlight-date">{{ task.creationDate }}</span></p>
-                        <p><strong>Start Date:</strong> <span class="highlight-date">{{ task.startDate }}</span></p>
-                        <p><strong>End Date:</strong> <span class="highlight-date highlight-end">{{ task.endDate }}</span></p>
-                    </div>
-                    <div class="col-12 col-sm-3">
-                        <p><strong>Team Members:</strong> {{ task.teamMembers }}</p>
-                        <p><strong>Task:</strong> {{ task.taskCount }}</p>
-                        <p><strong>Due Date:</strong> <span class="negative-days">-{{ task.dueDays }}</span></p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div> -->                                      
-                                                                               
-                                                                                        
-                                                        
 
-  <!-- <div class="container mt-4">
-    <div class="task-card" *ngIf="task">
-        <div class="d-flex align-items-center">
-            <img src="assets/task-icon.png" alt="Task Icon" width="50">
-            <div class="ms-3">
-                <h5>{{ task.name }}</h5>
-                <p class="status">Status: {{ task.status }}</p>
-            </div>
-        </div>
-        <div>
-            <p><strong>Created by:</strong> {{ task.createdBy }}</p>
-            <p><strong>Program Manager:</strong> {{ task.programManager || '-' }}</p>
-            <p><strong>Project Manager:</strong> {{ task.projectManager }}</p>
-        </div>
-        <div>
-            <p><strong>Creation Date:</strong> <span class="highlight-date">{{ task.creationDate }}</span></p>
-            <p><strong>Start Date:</strong> <span class="highlight-date">{{ task.startDate }}</span></p>
-            <p><strong>End Date:</strong> <span class="highlight-date highlight-end">{{ task.endDate }}</span></p>
-        </div>
-        <div>
-            <p><strong>Team Members:</strong> {{ task.teamMembers }}</p>
-            <p><strong>Task:</strong> {{ task.taskCount }}</p>
-            <p><strong>Due Date:</strong> <span class="negative-days">{{ task.dueDate }} Days</span></p>
-        </div>
-    </div>
-</div> -->                                                                                                                                                                                                     
 
-<style>
-  .task-card {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      background: #fff;
-      padding: 15px;
-      border-radius: 10px;
-      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-      margin: 20px;
-  }
-  .status {
-      color: green;
-      font-weight: bold;
-  }
-  .highlight-date {
-      background: yellow;
-      padding: 3px 8px;
-      border-radius: 5px;
-  }
-  .highlight-end {
-      background: pink;
-  }
-  .negative-days {
-      color: green;
-  }
-</style>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
+
+<body class="dark-mode"></body>
+
 
 <div class="container mt-4">
+  <div class="header1 d-flex justify-content-between mt-5 mb-4">
   <h3>Projects</h3>
+  <h3>Welcome, {{ userName}} </h3>
   <button (click)="redirectToAddProject()" class="btn btn-primary mb-3">Add Project</button>
+</div>
 
-  <div *ngFor="let project of projects" class="task-card" (click)="redirectToTask(project)" style="cursor: pointer;">
+<div class="row mb-5">
+  <div class="col-md-6">
+    <input type="text" class="form-control" placeholder="Search by project name"
+           [(ngModel)]="searchText">
+  </div>
+  <div class="col-md-4">
+    <select class="form-select" [(ngModel)]="selectedStatus">
+      <option value="">All Statuses</option>
+      <option value="Not Started">Not Started</option>
+      <option value="In Progress">In Progress</option>
+      <option value="Completed">Completed</option>
+    </select>
+  </div>
+  <div class="col-md-2">
+    <button class="btn btn-secondary w-100" (click)="clearFilters()"><i class="bi bi-x-circle me-1"></i>Clear</button>
+  </div>
+</div>
+
+
+  <div *ngFor="let project of filteredProjects()" class="task-card" (click)="redirectToTask(project)" style="cursor: pointer;">
       <div class="d-flex align-items-center" >
           <img src="https://app.intimepro.io/assets/common/images/projects/default%20image%20for%20project%20-1.png" 
                alt="Task Icon" width="50">
@@ -194,7 +75,10 @@
   </div>
 </div>
 
-<!-- Edit Project Modal -->
+
+  
+                                                                                     
+  <!-- Edit Project Modal -->
 <div class="modal fade" id="editProjectModal" tabindex="-1" aria-labelledby="editProjectModalLabel" aria-hidden="true">
     <div class="modal-dialog">
       <div class="modal-content">
@@ -202,17 +86,73 @@
           <div class="modal-header">
             <h5 class="modal-title" id="editProjectModalLabel">Edit Project</h5>
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-          </div>
-          
+          </div>                                           
+  
           <div class="modal-body">
+            <!-- Project Title -->                                            
             <div class="mb-3">
-              <label for="editProjectName" class="form-label">Project Name</label>
-              <input type="text" id="editProjectName" [(ngModel)]="selectedProject.projectname" name="editProjectName" class="form-control" required>
+              <label for="editProjectTitle" class="form-label">Project Title</label>
+              <input type="text" id="editProjectTitle" [(ngModel)]="selectedProject.title" name="editProjectTitle" class="form-control" required>
             </div>
   
-            <div class="mb-3">
+            <!-- Project Description -->
+            <div class="mb-3">                                                                                                                                                                                                                                                              
               <label for="editProjectDescription" class="form-label">Project Description</label>
-              <textarea id="editProjectDescription" [(ngModel)]="selectedProject.projectdescription" name="editProjectDescription" class="form-control" required></textarea>
+              <textarea id="editProjectDescription" [(ngModel)]="selectedProject.description" name="editProjectDescription" class="form-control" required></textarea>
+            </div>
+  
+            <!-- Created By -->
+            <div class="mb-3">
+              <label for="editCreatedBy" class="form-label">Created By</label>
+              <input type="text" id="editCreatedBy" [(ngModel)]="selectedProject.createdBy" name="editCreatedBy" class="form-control">
+            </div>
+  
+            <!-- Program Manager -->
+            <div class="mb-3">
+              <label for="editProgramManager" class="form-label">Program Manager</label>
+              <input type="text" id="editProgramManager" [(ngModel)]="selectedProject.programManager" name="editProgramManager" class="form-control">
+            </div>
+  
+            <!-- Project Manager -->
+            <div class="mb-3">
+              <label for="editProjectManager" class="form-label">Project Manager</label>
+              <input type="text" id="editProjectManager" [(ngModel)]="selectedProject.projectManager" name="editProjectManager" class="form-control">
+            </div>
+  
+            <!-- Creation Date -->
+            <div class="mb-3">
+              <label for="editCreationDate" class="form-label">Creation Date</label>
+              <input type="date" id="editCreationDate" [(ngModel)]="selectedProject.creationDate" name="editCreationDate" class="form-control">
+            </div>
+  
+            <!-- Start Date -->
+            <div class="mb-3">
+              <label for="editStartDate" class="form-label">Start Date</label>                                    
+              <input type="date" id="editStartDate" [(ngModel)]="selectedProject.startDate" name="editStartDate" class="form-control">
+            </div>
+  
+            <!-- End Date -->
+            <div class="mb-3">
+              <label for="editEndDate" class="form-label">End Date</label>
+              <input type="date" id="editEndDate" [(ngModel)]="selectedProject.endDate" name="editEndDate" class="form-control">
+            </div>
+  
+            <!-- Team Members -->
+            <div class="mb-3">
+              <label for="editTeamMembers" class="form-label">Team Members</label>
+              <input type="text" id="editTeamMembers" [(ngModel)]="selectedProject.teamMembers" name="editTeamMembers" class="form-control">
+            </div>
+
+
+            <!-- Status -->
+            <div class="mb-3">
+              <label for="editStatus" class="form-label">Status</label>
+              <select id="editStatus" [(ngModel)]="selectedProject.status" name="editStatus" class="form-select">
+                <option value="Not Started">Not Started</option>
+                <option value="In Progress">In Progress</option>                                   
+                <option value="Completed">Completed</option>
+                <option value="On Hold">On Hold</option>
+              </select>
             </div>
           </div>
   
@@ -221,8 +161,7 @@
             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
           </div>
         </form>
-      </div>
-    </div>
-  </div>
-  
-                                                                                     
+      </div>                                                               
+    </div>                                                                                                                                                                                       
+  </div>                                                        
+                                                                                                                                                                                                                                                                                           

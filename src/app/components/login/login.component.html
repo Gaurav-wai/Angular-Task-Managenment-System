@@ -5,38 +5,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>login</title>
 </head>
-<!-- <body>
-
-    <div class="container row d-flex justify-content-center" >
-<div class="login" >
-<form>
-    <div class="mb-3">
-      <label for="exampleInputEmail1" class="form-label">Email address</label>
-      <input [(ngModel)]="email" name="email" type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
-      <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
-    </div>
-    <div class="mb-3">
-      <label for="exampleInputPassword1" class="form-label">Password</label>
-      <input [(ngModel)]="password" name="password" type="password" class="form-control" id="exampleInputPassword1">
-    </div>
-    <div class="mb-3 form-check">
-      <input type="checkbox" class="form-check-input" id="exampleCheck1">
-      <label class="form-check-label" for="exampleCheck1">Check me out</label>
-    </div>
-    <button (click) = "onSubmit()" type="submit" class="btn btn-primary">Submit</button>
-  </form>
-</div>
-</div>
-
-<h1>{{email}}</h1>
-<h1>{{password}}</h1> -->
 
 
 <body class="bg-light d-flex justify-content-center align-items-center vh-100">
     <div class="card p-4 shadow" style="max-width: 400px; width: 100%;">
       <!-- Round Profile Image -->
       <img
-        src="assets/images/profile.png" 
+        src="https://img.freepik.com/premium-vector/avatar-profile-icon-flat-style-male-user-profile-vector-illustration-isolated-background-man-profile-sign-business-concept_157943-38764.jpg" 
         alt="Profile Picture"
         class="profile-img mx-auto d-block mb-4"
       />
@@ -47,7 +22,7 @@
 
       <!-- Login Form -->
       <h3 class="text-center mb-4">Login</h3>
-      <form>
+      <form #loginForm="ngForm" (ngSubmit)="onSubmit()">
         <div class="mb-3">
           <label for="email" class="form-label">Email address</label>
           <input
@@ -56,9 +31,16 @@
             class="form-control"
             id="email"
             placeholder="Enter email"
+            #emailRef="ngModel"
             required
           />
+          <div *ngIf="emailRef.invalid && (emailRef.touched || emailRef.dirty)" class="text-danger small">
+            <div *ngIf="emailRef.errors?.['required']">Email is required.</div>
+            <div *ngIf="emailRef.errors?.['email']">Invalid email format.</div>
+          </div>
         </div>
+
+
         <div class="mb-3">
           <label for="password" class="form-label">Password</label>
           <input
@@ -67,10 +49,17 @@
             class="form-control"
             id="password"
             placeholder="Enter password"
+            #passwordRef="ngModel"
+
             required
           />
+
+          <div *ngIf="passwordRef.invalid && (passwordRef.touched || passwordRef.dirty)" class="text-danger small">
+            <div *ngIf="passwordRef.errors?.['required']">Password is required.</div>
+          </div>
+
         </div>
-        <button (click) = "onSubmit()" type="submit" class="btn btn-primary w-100">Login</button>
+        <button [disabled]="loginForm.invalid" type="submit" class="btn btn-primary w-100">Login</button>
 
         <div class="signup my-2">
             <div>Dont have Account?</div>
@@ -82,5 +71,5 @@
    
   </body>
 
-<!-- </body> -->
+
 </html>

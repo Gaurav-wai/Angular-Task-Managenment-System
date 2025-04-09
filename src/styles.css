@@ -1,1 +1,141 @@
-/* You can add global styles to this file, and also import other style files */
+/* styles.css or styles.scss */
+body.dark-mode {
+  background-color: #121212;
+  color: #f1f1f1;
+}
+
+.dark-mode .card {
+  background-color: #1e1e1e;
+  color: #f1f1f1;
+}
+
+.dark-mode .task-card {
+  background-color: #1e1e1e !important;
+  color: #fff !important;
+}
+
+.dark-mode .table2  {
+  background-color: #1e1e1e !important;
+  color: #fff !important;
+}
+.dark-mode .table2 th,
+.dark-mode .table2 td {
+  background-color: #1e1e1e !important;
+  color: #fff !important;
+}
+
+/* Optional: hover effect fix for dark mode */
+.dark-mode .table2 tbody tr:hover {
+  background-color: #333 !important;
+}
+
+  .dark-mode .table-container {
+    background-color: #1e1e1e !important;
+    color: #fff !important;
+  }
+  
+  .dark-mode .form-control,
+  .dark-mode .form-select {
+    background-color: #2a2a2a;
+    color: #ffffff;
+    border-color: #444;
+  }
+  
+  .dark-mode .btn-outline-secondary {
+    border-color: #f1f1f1;
+    color: #f1f1f1;
+  }
+  
+  .dark-mode .btn-outline-secondary:hover {
+    background-color: #ffffff22;
+  }
+  
+  .dark-mode .modal-content {
+    background-color: #1f1f1f;
+    color: #ffffff;
+  }
+  
+
+  body.dark-mode a {
+    color: #90caf9;
+  }
+  
+  body.dark-mode a:hover {
+    color: #bbdefb;
+  }
+
+
+
+
+.dark-mode .text2  {
+  background-color: #1e1e1e !important;
+    color: #fff !important;
+}
+
+.dark-mode .navbar2{
+  background-color: #1e1e1e !important;
+  color: #fff !important;
+}
+
+/* GLOBAL Dark mode navbar text color */
+body.dark-mode .nav-item .nav-link,
+body.dark-mode .nav-item .nav-link span,
+body.dark-mode .nav-item.dropdown .nav-link,
+body.dark-mode .nav-item.dropdown span {
+  color: #ffffff !important;
+  opacity: 1 !important;
+}
+
+/* Optional hover effect */
+body.dark-mode .nav-item .nav-link:hover {
+  color: #00bcd4 !important;
+}
+
+/* Optional: Dropdown menu items */
+body.dark-mode .dropdown-menu li,
+body.dark-mode .dropdown-menu a {
+  color: #ffffff !important;
+  background-color: #1f1f1f !important;
+}
+
+/* Optional: Profile image text (next to image) */
+body.dark-mode .nav-item.dropdown .fw-semibold {
+  color: #ffffff !important;
+}
+
+
+/* 🌙 Dark Mode: Profile Dropdown Window */
+body.dark-mode .dropdown-menu {
+  background-color: #1f1f1f !important;
+  color: #ffffff !important;
+  border: 1px solid #444 !important;
+  box-shadow: 0 4px 12px rgba(0, 188, 212, 0.2) !important;
+}
+
+/* 🌙 Profile Image */
+body.dark-mode .dropdown-menu img {
+  border: 2px solid #00bcd4;
+  background-color: #ffffff;
+}
+
+/* 🌙 Name text inside dropdown (e.g. John Doe) */
+body.dark-mode .dropdown-menu .fw-bold {
+  color: #ffffff !important;
+}
+
+/* 🌙 Logout button */
+body.dark-mode .dropdown-menu .btn {
+  background-color: #e53935 !important;
+  color: #ffffff !important;
+  border: none !important;
+}
+
+/* 🌙 Hover effect for logout */
+body.dark-mode .dropdown-menu .btn:hover {
+  background-color: #d32f2f !important;
+}
+
+/* Optional: center content text color */
+body.dark-mode .dropdown-menu li {
+  color: #ffffff !important;
+}

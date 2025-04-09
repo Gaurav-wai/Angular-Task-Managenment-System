@@ -1,10 +1,12 @@
+import { NgIf } from '@angular/common';
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { Router } from '@angular/router';
+import { NavbarComponent } from '../navbar/navbar.component';
 @Component({
   selector: 'app-add-task',
-  imports: [FormsModule],
+  imports: [FormsModule, NgIf, NavbarComponent],
   templateUrl: './add-task.component.html',
   styleUrl: './add-task.component.css'
 })
@@ -60,3 +62,4 @@ export class AddTaskComponent {
   }
 
 }
+                                                                                                                                                     
