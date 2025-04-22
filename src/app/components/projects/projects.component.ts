@@ -130,6 +130,14 @@ export class ProjectsComponent {
   }
   
 
+  getStatusBadgeClass(status: string): string {
+    switch (status?.toLowerCase()) {
+      case 'not started': return 'secondary';
+      case 'in progress': return 'primary';
+      case 'completed': return 'success';
+      default: return 'dark';
+    }
+  }
 
 
   filteredProjects() {
@@ -159,3 +167,4 @@ export class ProjectsComponent {
   
 
 }
+                                                                                                                                                   

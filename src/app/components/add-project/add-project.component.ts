@@ -12,6 +12,8 @@ import { NavbarComponent } from '../navbar/navbar.component';
 })
 export class AddProjectComponent {
 
+  teamMembers = ['Alice', 'Bob', 'Charlie'];
+
   newProject = {
     title: '',
     description: '',
@@ -19,26 +21,17 @@ export class AddProjectComponent {
     projectManager: '',
     startDate: '',
     endDate: '',
-    teamMembers:[],
-    dueDays: '',
+    teamMembers: '' ,
+    dueDays: null as number | null,
     taskCount: 0,
     status:'',
     creationDate: ''
   }; 
 
 
-  teamMembers: string[] = [
-    'Alice',
-    'Bob',
-    'Charlie',
-    'David',
-    'Emma',
-    'Frank',
-    'Grace',
-    'Hannah',
-    'Ian',
-    'Julia'
-  ];
+
+
+  // teamMembers: [] = ['Alice', 'Bob', 'Charlie'];
 
   // now: Date = new Date();
 
@@ -47,12 +40,26 @@ export class AddProjectComponent {
   constructor(private router: Router) {
 
     this.now = new Date().toISOString().substring(0, 10);
-
+                                                                            
     // Set the default value for creationDate using now
     this.newProject.creationDate = this.now;
   }
 
-
+  calculateDueDays() {
+    const start = new Date(this.newProject.startDate);
+    const end = new Date(this.newProject.endDate);
+  
+    if (this.newProject.startDate && this.newProject.endDate) {
+      const diffInTime = end.getTime() - start.getTime();
+      const diffInDays = Math.ceil(diffInTime / (1000 * 3600 * 24)); // Converts ms to days
+  
+      this.newProject.dueDays = diffInDays >= 0 ? diffInDays : 0; // Avoid negative due days
+    } else {
+      this.newProject.dueDays = null; // Or set to 0 if you want
+    }
+  }
+  
+                                                            
   saveProject() {
 
       // 🔹 Get logged-in user email from localStorage
@@ -77,4 +84,3 @@ export class AddProjectComponent {
   }
 
 }
-                                                                                                                                                                                  

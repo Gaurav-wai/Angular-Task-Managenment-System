@@ -5,7 +5,7 @@
 
     <div class="container-fluid p-5">
         <div class="d-flex justify-content-between mb-3">
-            <h3>Tasks for {{ projectTitle }}</h3>
+            <h3>Tasks Management</h3>
             <button class="btn btn-primary" (click)="navigateToAddTask()">Add Task</button>
         </div>
         
@@ -89,7 +89,9 @@
          </td>
    
          <td>
-           <span class="badge bg-primary">{{ task.status }}</span>
+          <span class="badge" [ngClass]="getStatusBadgeClass(task.status)">
+            {{ task.status }}
+          </span>
          </td>
    
          <td>{{ task.estimate }}</td>

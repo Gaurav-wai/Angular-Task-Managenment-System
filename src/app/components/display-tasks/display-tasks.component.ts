@@ -57,6 +57,16 @@ isDarkMode: boolean = false;
     });
 }
 
+getStatusBadgeClass(status: string): string {
+  switch (status.toLowerCase()) {
+    case 'high': return 'bg-danger';
+    case 'medium': return 'bg-warning text-dark';
+    case 'low':
+    case 'completed': return 'bg-success';
+    default: return 'bg-secondary';
+  }
+}
+
 
 editTask(task: any, index: number) {
   this.selectedTask = { ...task };

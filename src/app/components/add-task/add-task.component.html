@@ -10,6 +10,7 @@
         <div class="col-md-6">
           <label for="title" class="form-label">Title</label>
           <input type="text" 
+          placeholder="Enter Task"
                  class="form-control" 
                  id="title" 
                  name="title" 
@@ -25,6 +26,7 @@
         <div class="col-md-6">
           <label for="assignedTo" class="form-label">Assigned To</label>
           <input type="text" 
+          placeholder="Assigned To"
                  class="form-control"
                  id="assignedTo" 
                  name="assignedTo" 
@@ -61,6 +63,7 @@
         <div class="col-md-6">
           <label for="assignedUser" class="form-label">Assigned User</label>
           <input type="text" 
+          placeholder="Select User"
                  class="form-control" 
                  id="assignedUser" 
                  name="assignedUser" 
@@ -74,26 +77,27 @@
       </div>
   
       <div class="row mt-3">
-        <!-- Estimate -->
-        <div class="col-md-6">
-          <label for="estimate" class="form-label">Estimate (h)</label>
-          <input type="number" 
-                 class="form-control" 
-                 id="estimate" 
-                 name="estimate" 
-                 [(ngModel)]="task.estimate" 
-                 #estimate="ngModel" 
-                 required 
-                 min="1" />
-          <div *ngIf="estimate.invalid && (estimate.dirty || estimate.touched)" class="text-danger">
-            Please enter a valid estimate (min 1 hour).
-          </div>
-        </div>
+       <!-- Estimate -->
+<div class="col-md-6">
+  <label for="estimate" class="form-label">Estimate (HH:mm)</label>
+  <input type="time" 
+         class="form-control" 
+         id="estimate" 
+         name="estimate" 
+         [(ngModel)]="task.estimate" 
+         #estimate="ngModel"
+         required />
+  <div *ngIf="estimate.invalid && (estimate.dirty || estimate.touched)" class="text-danger">
+    Please enter a valid time estimate.
+  </div>
+</div>
+
   
         <!-- Time Spent -->
         <div class="col-md-6">
           <label for="timeSpent" class="form-label">Time Spent (h)</label>
           <input type="number" 
+          placeholder="Enter Time Spent"
                  class="form-control" 
                  id="timeSpent" 
                  name="timeSpent" 
@@ -110,10 +114,12 @@
       <!-- Submit Button -->
       <div class="d-flex justify-content-end mt-4">
         <button type="submit" class="btn btn-primary" [disabled]="taskForm.invalid">Add Task</button>
+        <button type="button" class="btn btn-danger ms-3" (click)="onClose()">Close</button>
       </div>
   
     </form>
   
     <!-- Close Button -->
-    <button type="button" class="btn btn-danger mt-3" (click)="onClose()">Close</button>
+
+    
   </div>

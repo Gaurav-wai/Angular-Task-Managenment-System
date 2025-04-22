@@ -11,7 +11,7 @@
   <div class="header1 d-flex justify-content-between mt-5 mb-4">
   <h3>Projects</h3>
   <h3>Welcome, {{ userName}} </h3>
-  <button (click)="redirectToAddProject()" class="btn btn-primary mb-3">Add Project</button>
+  <button (click)="redirectToAddProject()" class="btn btn-primary mb-3"> <i class="bi bi-plus"></i><span class="ms-2">New Project</span></button>
 </div>
 
 <div class="row mb-5">
@@ -33,48 +33,70 @@
 </div>
 
 
-  <div *ngFor="let project of filteredProjects()" class="task-card" (click)="redirectToTask(project)" style="cursor: pointer;">
-      <div class="d-flex align-items-center" >
-          <img src="https://app.intimepro.io/assets/common/images/projects/default%20image%20for%20project%20-1.png" 
-               alt="Task Icon" width="50">
-          <div class="ms-3">
-              <h5>{{ project.title }}</h5>
-              <p class="status">Status: {{ project.status }}</p>
+<div class="table-responsive my-4">
+  <table class="table table-hover table-bordered align-middle">
+    <thead class="table-dark text-center">
+      <tr>
+        <th>Title</th>
+        <th>Status</th>
+        <th>Created By</th>
+        <th>Program Manager</th>
+        <th>Project Manager</th>
+        <th>Creation Date</th>
+        <th>Start Date</th>
+        <th>End Date</th>
+        <th>Team Members</th>
+        <th>Tasks</th>
+        <th>Due Days</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody *ngIf="filteredProjects().length > 0">
+      <tr *ngFor="let project of filteredProjects()" (click)="redirectToTask(project)" style="cursor: pointer;">
+        <td class="d-flex align-items-center gap-2">
+          <img src="https://app.intimepro.io/assets/common/images/projects/default%20image%20for%20project%20-1.png"
+               alt="Icon" width="30" class="rounded">
+          <span class="fw-semibold">{{ project.title }}</span>
+        </td>
+        <td class="text-center">
+          <span class="badge bg-info text-dark px-3 py-2">{{ project.status }}</span>
+        </td>
+        <td>{{ project.createdBy }}</td>
+        <td>{{ project.programManager || '-' }}</td>
+        <td>{{ project.projectManager }}</td>
+        <td>{{ project.creationDate }}</td>
+        <td>{{ project.startDate }}</td>
+        <td>{{ project.endDate }}</td>
+        <td>{{ project.teamMembers }}</td>
+        <td class="text-center">{{ project.taskCount }}</td>
+        <td>
+          <span class="text-danger fw-medium">
+            {{ project.dueDays }} Days
+          </span>
+        </td>
+        <td (click)="$event.stopPropagation()" class="text-center">
+          <div class="d-flex justify-content-center gap-2">
+            <button class="btn btn-sm btn-warning"
+                    (click)="openEditModal(project)"
+                    data-bs-toggle="modal"
+                    data-bs-target="#editProjectModal">
+              <i class="bi bi-pencil-fill me-1"></i> Edit
+            </button>
+            <button class="btn btn-sm btn-outline-danger"
+                    (click)="deleteProject(project.title)">
+              <i class="bi bi-trash me-1"></i> Delete
+            </button>
           </div>
-      </div>
-      <div>
-          <p><strong>Created by:</strong> {{ project.createdBy }}</p>
-          <p><strong>Program Manager:</strong> {{ project.programManager || '-' }}</p>
-          <p><strong>Project Manager:</strong> {{ project.projectManager }}</p>
-      </div>
-      <div>
-          <p><strong>Creation Date:</strong> <span class="highlight-date">{{ project.creationDate }}</span></p>
-          <p><strong>Start Date:</strong> <span class="highlight-date">{{ project.startDate }}</span></p>
-          <p><strong>End Date:</strong> <span class="highlight-date highlight-end">{{ project.endDate }}</span></p>
-      </div>
-      <div>
-          <p><strong>Team Members:</strong> {{ project.teamMembers }}</p>
-          <p><strong>Tasks:</strong> {{ project.taskCount }}</p>
-          <p><strong>Due Date:</strong> <span class="negative-days">{{ project.dueDays }} Days</span></p>
-      </div>
-
-      <div class="text-end mt-2">
-        <button class="btn btn-sm btn-warning me-2"
-        (click)="openEditModal(project); $event.stopPropagation()"
-        data-bs-toggle="modal"
-        data-bs-target="#editProjectModal">
-  Edit
-</button>
-
-<button class="btn btn-sm btn-outline-danger"
-        (click)="deleteProject(project.title); $event.stopPropagation()">
-  Delete
-</button>
-
-      
-  </div>
+        </td>
+      </tr>
+    </tbody>
+  </table>
 </div>
 
+<!-- No Projects Found -->
+<div *ngIf="filteredProjects().length === 0" class="alert alert-warning text-center mt-4 fs-5">
+  <i class="bi bi-exclamation-circle me-2"></i> No projects found with current filters.
+</div>
 
   
                                                                                      
@@ -164,4 +186,4 @@
       </div>                                                               
     </div>                                                                                                                                                                                       
   </div>                                                        
-                                                                                                                                                                                                                                                                                           
+                                                                                                                                                                                                                                                                                                                                                     

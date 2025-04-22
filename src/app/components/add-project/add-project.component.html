@@ -8,17 +8,160 @@
   <!-- Template reference: projectForm -->
   <form #projectForm="ngForm" (ngSubmit)="saveProject()">
 
-    <!-- Title
-    <div class="form-group">
-      <label>Title:</label>
-      <input type="text" class="form-control" name="title" [(ngModel)]="newProject.title" #title="ngModel" required />
-      <div *ngIf="title.invalid && (title.dirty || title.touched)" class="text-danger">
-        Title is required.
+
+    <div class=" container">
+      <div class="row">
+        <div class="col-md-12 contentPadding">
+          <!-- Title -->
+          <div class="form-group">
+            <label>Project:</label>
+            <input type="text" class="form-control" name="title" placeholder="Enter Project Name"
+              [(ngModel)]="newProject.title" #title="ngModel" required />
+            <div *ngIf="title.invalid && (title.dirty || title.touched)" class="text-danger">
+              Title is required.
+            </div>
+          </div>
+        </div>
+        <div class="col-md-12 contentPadding">
+          <!-- Description -->
+          <div class="form-group">
+            <label>Description:</label>
+            <textarea class="form-control" name="description" placeholder="Enter Project Description" rows="3"
+              [(ngModel)]="newProject.description" #description="ngModel" required></textarea>
+            <div *ngIf="description.invalid && (description.dirty || description.touched)" class="text-danger">
+              Description is required.
+            </div>
+          </div>
+        </div>
+        <div class="col-md-3 contentPadding">
+          <!-- Status -->
+          <div class="form-group">
+            <label>Status:</label>
+            <select class="form-select" [(ngModel)]="newProject.status" name="status" #status="ngModel" required>
+              <!-- <option value="" disabled selected>Select status</option> -->
+              <option value="" disabled selected style="color: gray;">New</option>
+
+              <option value="Not Started">Not Started</option>
+              <option value="In Progress">In Progress</option>
+              <option value="Completed">Completed</option>
+              <option value="On Hold">On Hold</option>
+            </select>
+            <div *ngIf="status.invalid && (status.dirty || status.touched)" class="text-danger">
+              Status is required.
+            </div>
+          </div>
+    
+        </div>
+        <div class="col-md-3 contentPadding">
+    
+          <!-- Project Manager -->
+          <div class="form-group">
+            <label>Project Manager:</label>
+            <input type="text" class="form-control" name="projectManager" [(ngModel)]="newProject.projectManager"
+              #projectManager="ngModel" required />
+            <div *ngIf="projectManager.invalid && (projectManager.dirty || projectManager.touched)" class="text-danger">
+              Project Manager is required.
+            </div>
+          </div>
+        </div>
+        <div class="col-md-3 contentPadding">
+          <!-- Start Date -->
+          <div class="form-group">
+            <label>Start Date:</label>
+            <input type="date" class="form-control" name="startDate" [(ngModel)]="newProject.startDate" #startDate="ngModel"
+            (change)="calculateDueDays()" required />
+            <div *ngIf="startDate.invalid && (startDate.dirty || startDate.touched)" class="text-danger">
+              Start Date is required.
+            </div>
+          </div>
+        </div>
+        <div class="col-md-3 contentPadding">
+          <!-- End Date -->
+          <div class="form-group">
+            <label>End Date:</label>
+            <input type="date" class="form-control" name="endDate" [(ngModel)]="newProject.endDate" #endDate="ngModel"
+            (change)="calculateDueDays()" required />
+            <div *ngIf="endDate.invalid && (endDate.dirty || endDate.touched)" class="text-danger">
+              End Date is required.
+            </div>
+          </div>
+        </div>
+        <div class="col-md-3 contentPadding">
+          <!-- Team Members -->
+          <div class="form-group">
+            <label>Team Members:</label>
+            <select class="form-control" [(ngModel)]="newProject.teamMembers" name="teamMembers">
+              <option value="" disabled style="color: gray;">Select Member</option>
+              <option *ngFor="let user of teamMembers" [value]="user">{{ user }}</option>
+            </select>
+          </div>
+        </div>
+        <!--  <div class="col-md-3 contentPadding"> -->
+          <!-- Task Count -->
+        <!--  <div class="form-group">
+            <label>Task Count:</label>
+            <input type="number" class="form-control" name="taskCount" [(ngModel)]="newProject.taskCount"
+              #taskCount="ngModel" required min="0" />
+            <div *ngIf="taskCount.invalid && (taskCount.dirty || taskCount.touched)" class="text-danger">
+              Task count must be 0 or more.
+            </div>
+          </div>
+    
+        </div> -->
+        <div class="col-md-3 contentPadding">
+          <!-- Due Days -->
+          <div class="form-group">
+            <label>Due Days:</label>
+            <input type="number" class="form-control" name="dueDays" [(ngModel)]="newProject.dueDays" #dueDays="ngModel"
+              required min="0" />
+            <div *ngIf="dueDays.invalid && (dueDays.dirty || dueDays.touched)" class="text-danger">
+              Enter a valid due day (0 or more).
+            </div>
+          </div>
+        </div>
+        <div class="col-md-3 contentPadding">
+          <!-- Created By -->
+          <div class="form-group">
+            <label>Created By:</label>
+            <input type="text" class="form-control" name="createdBy" [(ngModel)]="newProject.createdBy" #createdBy="ngModel"
+              required />
+            <div *ngIf="createdBy.invalid && (createdBy.dirty || createdBy.touched)" class="text-danger">
+              Created By is required.
+            </div>
+          </div>
+        </div>
+        <div class="col-md-3 contentPadding">
+    
+          <!-- Creation Date -->
+          <div class="form-group">
+            <label>Created On:</label>
+            <input type="date" class="form-control" name="creationDate" [(ngModel)]="newProject.creationDate"
+              #creationDate="ngModel" style="background-color: #d3d3d3;" required readonly />
+            <div *ngIf="creationDate.invalid && (creationDate.dirty || creationDate.touched)" class="text-danger">
+              Creation Date is required.
+            </div>
+          </div>
+        </div>
+    
+        <div class="col-md-12 d-flex justify-content-end ">
+          <!-- Submit Button -->
+          <button type="submit" class="btn btn-primary mt-3" [disabled]="projectForm.invalid">
+            Create Project
+          </button>
+    
+          <button type="submit" class="btn btn-danger mt-3 ms-2" [disabled]="projectForm.invalid">
+            Cancel
+          </button>
+        </div>
+    
+    
+    
+    
+    
+    
+    
       </div>
-    </div> -->
-
-
-
+    </div>
 
 
 
@@ -34,162 +177,3 @@
 
 
 
-<div class=" container">
-  <div class="row">
-    <div class="col-md-12 contentPadding">
-      <!-- Title -->
-      <div class="form-group">
-        <label>Project:</label>
-        <input type="text" class="form-control" name="title" placeholder="Enter Project Name"
-          [(ngModel)]="newProject.title" #title="ngModel" required />
-        <div *ngIf="title.invalid && (title.dirty || title.touched)" class="text-danger">
-          Title is required.
-        </div>
-      </div>
-    </div>
-    <div class="col-md-12 contentPadding">
-      <!-- Description -->
-      <div class="form-group">
-        <label>Description:</label>
-        <textarea class="form-control" name="description" placeholder="Enter Project Description" rows="3"
-          [(ngModel)]="newProject.description" #description="ngModel" required></textarea>
-        <div *ngIf="description.invalid && (description.dirty || description.touched)" class="text-danger">
-          Description is required.
-        </div>
-      </div>
-    </div>
-    <div class="col-md-3 contentPadding">
-      <!-- Status -->
-      <div class="form-group">
-        <label>Status:</label>
-        <select class="form-select" [(ngModel)]="newProject.status" name="status" #status="ngModel" required>
-          <!-- <option value="" disabled selected>Select status</option> -->
-          <option value="New" selected>New</option>
-
-          <option value="Not Started">Not Started</option>
-          <option value="In Progress">In Progress</option>
-          <option value="Completed">Completed</option>
-          <option value="On Hold">On Hold</option>
-        </select>
-        <div *ngIf="status.invalid && (status.dirty || status.touched)" class="text-danger">
-          Status is required.
-        </div>
-      </div>
-
-    </div>
-    <div class="col-md-3 contentPadding">
-
-      <!-- Project Manager -->
-      <div class="form-group">
-        <label>Project Manager:</label>
-        <input type="text" class="form-control" name="projectManager" [(ngModel)]="newProject.projectManager"
-          #projectManager="ngModel" required />
-        <div *ngIf="projectManager.invalid && (projectManager.dirty || projectManager.touched)" class="text-danger">
-          Project Manager is required.
-        </div>
-      </div>
-    </div>
-    <div class="col-md-3 contentPadding">
-      <!-- Start Date -->
-      <div class="form-group">
-        <label>Start Date:</label>
-        <input type="date" class="form-control" name="startDate" [(ngModel)]="newProject.startDate" #startDate="ngModel"
-          required />
-        <div *ngIf="startDate.invalid && (startDate.dirty || startDate.touched)" class="text-danger">
-          Start Date is required.
-        </div>
-      </div>
-    </div>
-    <div class="col-md-3 contentPadding">
-      <!-- End Date -->
-      <div class="form-group">
-        <label>End Date:</label>
-        <input type="date" class="form-control" name="endDate" [(ngModel)]="newProject.endDate" #endDate="ngModel"
-          required />
-        <div *ngIf="endDate.invalid && (endDate.dirty || endDate.touched)" class="text-danger">
-          End Date is required.
-        </div>
-      </div>
-    </div>
-    <div class="col-md-3 contentPadding">
-      <!-- Team Members -->
-      <div class="form-group">
-        <label>Team Members:</label>
-        <!-- <input type="number" class="form-control" name="teamMembers" [(ngModel)]="newProject.teamMembers"
-        #teamMembers="ngModel" required min="1" /> -->
-        <select class="form-control" [(ngModel)]="newProject.teamMembers" name="teamMember">
-          <option *ngFor="let user of teamMembers" [value]="user">
-            {{ user }}
-          </option>
-        </select>
-        <!-- <div *ngIf="teamMembers.invalid && (teamMembers.dirty || teamMembers.touched)" class="text-danger"> -->
-        <!-- Please enter at least 1 team member. -->
-        <!-- </div> -->
-      </div>
-    </div>
-    <div class="col-md-3 contentPadding">
-      <!-- Task Count -->
-      <div class="form-group">
-        <label>Task Count:</label>
-        <input type="number" class="form-control" name="taskCount" [(ngModel)]="newProject.taskCount"
-          #taskCount="ngModel" required min="0" />
-        <div *ngIf="taskCount.invalid && (taskCount.dirty || taskCount.touched)" class="text-danger">
-          Task count must be 0 or more.
-        </div>
-      </div>
-
-    </div>
-    <div class="col-md-3 contentPadding">
-      <!-- Due Days -->
-      <div class="form-group">
-        <label>Due Days:</label>
-        <input type="number" class="form-control" name="dueDays" [(ngModel)]="newProject.dueDays" #dueDays="ngModel"
-          required min="0" />
-        <div *ngIf="dueDays.invalid && (dueDays.dirty || dueDays.touched)" class="text-danger">
-          Enter a valid due day (0 or more).
-        </div>
-      </div>
-    </div>
-    <div class="col-md-3 contentPadding">
-      <!-- Created By -->
-      <div class="form-group">
-        <label>Created By:</label>
-        <input type="text" class="form-control" name="createdBy" [(ngModel)]="newProject.createdBy" #createdBy="ngModel"
-          required />
-        <div *ngIf="createdBy.invalid && (createdBy.dirty || createdBy.touched)" class="text-danger">
-          Created By is required.
-        </div>
-      </div>
-    </div>
-    <div class="col-md-3 contentPadding">
-
-      <!-- Creation Date -->
-      <div class="form-group">
-        <label>Creation Date:</label>
-        <input type="date" class="form-control" name="creationDate" [(ngModel)]="newProject.creationDate"
-          #creationDate="ngModel" required readonly />
-        <div *ngIf="creationDate.invalid && (creationDate.dirty || creationDate.touched)" class="text-danger">
-          Creation Date is required.
-        </div>
-      </div>
-    </div>
-
-    <div class="col-md-12 d-flex justify-content-end ">
-      <!-- Submit Button -->
-      <button type="submit" class="btn btn-primary mt-3" [disabled]="projectForm.invalid">
-        Create Project
-      </button>
-
-      <button type="submit" class="btn btn-danger mt-3 ms-2" [disabled]="projectForm.invalid">
-        Cancel
-      </button>
-    </div>
-
-
-
-
-
-
-
-  </div>
-</div>
